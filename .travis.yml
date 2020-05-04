@@ -1,15 +1,12 @@
-sudo: false
 language: node_js
 node_js:
-  - 8
-matrix:
-  include:
-    - node_js: "9.0"
-      env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
-  allow_failures:
-    # Allow the nightly installs to fail
-    - env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
-script: "npm test"
-after_script:
-  - "npm i codecov"
-  - "./node_modules/.bin/codecov"
+- stable
+deploy:
+  provider: npm
+  email: yadickson@gmail.com
+  api_key: "${NPM_TOKEN}"
+  on:
+    tags: true
+env:
+  global:
+    secure: DWWRg1lmyz+6zFXsdJarlX4CQ8tSuPJNo2JSb078/3RaF4CsPcFx2EXr7p4a3XvrXJzGUraC0soaMsMLEkT1HzZmoZziIV0hCRysxaGID2HY/xJN8J4TzUQcakrCQVYu/qxoc4rc1AjHVEyYh9JufAYrWBNh9oOi+IFEHzXQAjaVFC8blLQ0MM41O/hRljQGhgVFZKDw6hGAN7m/Xe7aX9FrWNObs50NNe0MZJsdbIn8iyiOdntfi2tG19fwcLO7urRPAwsKa/ItAluavUA860UbAuKyYvV6jYS4GBXCeIy531OhJ1FBz+OB4S5r/ZvoxIVx0U8a2mZ2g6NEO+gP3NIztGHvQGE1mBPHy+2riG6DW4HtB9Z3pp1hss7gOdzIDxVi3LETz5q51mk5vnM4MLUQ8tdaNLI9kKLQjooym6rtJAa+VZi/y2eSelKW87F8m2vbk77PdDBmXBkiuEy5VmMI5sWn2LxwK4wyZ6RapzcNpZjSoLpybxCB4aaqGqF4gB5Orh9ZvgsjtYgfJhcdRqutrBTun3J0hCbvsKeTe2Dnyd31r4bvScu8ExkDfro1bgm3CKu+r9Z3vBT3eBTTAqUycu/ccrx0opS3YXRUpC8d2HfWZa7HUMT1Nu5UQUJLACPCQ38acukrVvYWjHet368Id5Hpf/fInIGFQxz32d0=

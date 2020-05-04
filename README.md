@@ -1,6 +1,8 @@
-# joi-router
+# koa-joi-router-ng
 
 Easy, rich and fully validated [koa][] routing.
+
+This fork use Joi@17 version
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -8,16 +10,16 @@ Easy, rich and fully validated [koa][] routing.
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/koa-joi-router.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/koa-joi-router
+[npm-image]: https://img.shields.io/npm/v/koa-joi-router-ng.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/koa-joi-router-ng
 [travis-image]: https://img.shields.io/travis/koajs/joi-router.svg?style=flat-square
 [travis-url]: https://travis-ci.org/koajs/joi-router
 [codecov-image]: https://codecov.io/github/koajs/joi-router/coverage.svg?branch=master
 [codecov-url]: https://codecov.io/github/koajs/joi-router?branch=master
 [david-image]: https://img.shields.io/david/koajs/joi-router.svg?style=flat-square
 [david-url]: https://david-dm.org/koajs/joi-router
-[download-image]: https://img.shields.io/npm/dm/koa-joi-router.svg?style=flat-square
-[download-url]: https://npmjs.org/package/koa-joi-router
+[download-image]: https://img.shields.io/npm/dm/koa-joi-router-ng.svg?style=flat-square
+[download-url]: https://npmjs.org/package/koa-joi-router-ng
 [co]: https://github.com/tj/co
 [koa]: http://koajs.com
 [co-body]: https://github.com/visionmedia/co-body
@@ -52,7 +54,7 @@ NodeJS `>= 7.6` is required.
 
 ```js
 const koa = require('koa');
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const Joi = router.Joi;
 
 const public = router();
@@ -94,12 +96,12 @@ app.listen(3000);
 ```
 
 ## Usage
-`koa-joi-router` returns a constructor which you use to define your routes.
+`koa-joi-router-ng` returns a constructor which you use to define your routes.
 The design is such that you construct multiple router instances, one for
 each section of your application which you then add as koa middleware.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const Joi = router.Joi;
 
 const pub = router();
@@ -128,7 +130,7 @@ release of Joi into the router.
 
 ```js
 const koa = require('koa');
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const Joi = router.Joi;
 ```
 
@@ -140,7 +142,7 @@ Adds a new route to the router. `route()` accepts an object or array of objects
 describing route behavior.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const public = router();
 
 public.route({
@@ -172,7 +174,7 @@ public.route({
 or
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const public = router();
 
 const routes = [
@@ -209,18 +211,18 @@ public.route(routes);
      - [any busboy constructor option][busboy]. eg `{ limits: { files: 1 }}`
      - `autoFields`: Determines whether form fields should be auto-parsed (default: `true`). See the [await-busboy docs](https://github.com/aheckmann/await-busboy#parts--parsestream-options).
   - `output`: see [output validation](#validating-output)
-  - `continueOnError`: if validation fails, this flags determines if `koa-joi-router` should [continue processing](#handling-errors) the middleware stack or stop and respond with an error immediately. useful when you want your route to handle the error response. default `false`
+  - `continueOnError`: if validation fails, this flags determines if `koa-joi-router-ng` should [continue processing](#handling-errors) the middleware stack or stop and respond with an error immediately. useful when you want your route to handle the error response. default `false`
 - `handler`: **required** async function or function
 - `pre`: async function or function, will be called before parser and validators
-- `meta`: meta data about this route. `koa-joi-router` ignores this but stores it along with all other route data
+- `meta`: meta data about this route. `koa-joi-router-ng` ignores this but stores it along with all other route data
 
 ### .get(),post(),put(),delete() etc - HTTP methods
 
-`koa-joi-router` supports the traditional `router.get()`, `router.post()` type APIs
+`koa-joi-router-ng` supports the traditional `router.get()`, `router.post()` type APIs
 as well.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 
 // signature: router.method(path [, config], handler [, handler])
@@ -235,7 +237,7 @@ admin.delete('/thing', config, middleware, handler);
 Middleware run in the order they are defined by .use()(or .get(), etc.) They are invoked sequentially, requests start at the first middleware and work their way "down" the middleware stack which matches Express 4 API.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const users = router();
 
 users.get('/:id', handler);
@@ -247,7 +249,7 @@ users.use('/:id', runThisAfterHandler);
 Defines a route prefix for all defined routes. This is handy in "mounting" scenarios.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const users = router();
 
 users.get('/:id', handler);
@@ -266,7 +268,7 @@ Defines middleware for named route parameters. Useful for auto-loading or valida
 _See [@koa/router](https://github.com/koajs/router/blob/master/API.md#module_koa-router--Router+param)_
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const users = router();
 
 const findUser = (id) => {
@@ -294,7 +296,7 @@ Generates routing middleware to be used with `koa`. If this middleware is
 never added to your `koa` application, your routes will not work.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const public = router();
 
 public.get('/home', homepage);
@@ -308,13 +310,13 @@ app.listen();
 
 The route definition for the currently matched route is available
 via `ctx.state.route`. This object is not the exact same route
-definition object which was passed into koa-joi-router, nor is it
+definition object which was passed into koa-joi-router-ng, nor is it
 used internally - any changes made to this object will
 not have an affect on your running application but is available
 to meet your introspection needs.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const public = router();
 public.get('/hello', async (ctx) => {
   console.log(ctx.state.route);
@@ -323,7 +325,7 @@ public.get('/hello', async (ctx) => {
 
 ## Additions to ctx.request
 
-When using the `validate.type` option, `koa-joi-router` adds a few new properties
+When using the `validate.type` option, `koa-joi-router-ng` adds a few new properties
 to `ctx.request` to faciliate input validation.
 
 ### ctx.request.body
@@ -560,7 +562,7 @@ This is helpful when you'd like to introspect the previous definitions and
 take action e.g. to [generate API documentation][] etc.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 admin.post('/thing', { validate: { type: 'multipart' }}, handler);
 
@@ -578,10 +580,10 @@ Because [path-to-regexp][]
 supports it, so do we!
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
-admin.get('/blog/:year(\\d{4})-:day(\\d{2})-:article(\\d{3})', async (ctx, next) => { 
- console.log(ctx.request.params) // { year: '2017', day: '01', article: '011' } 
+admin.get('/blog/:year(\\d{4})-:day(\\d{2})-:article(\\d{3})', async (ctx, next) => {
+ console.log(ctx.request.params) // { year: '2017', day: '01', article: '011' }
 });
 ```
 
@@ -590,7 +592,7 @@ admin.get('/blog/:year(\\d{4})-:day(\\d{2})-:article(\\d{3})', async (ctx, next)
 Defining a route for multiple HTTP methods in a single shot is supported.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 admin.route({
   path: '/',
@@ -605,7 +607,7 @@ Often times you may need to add additional, route specific middleware to a
 single route.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 admin.route({
   path: '/',
@@ -620,7 +622,7 @@ You may want to bundle and nest middleware in different ways for reuse and
 organization purposes.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 const commonMiddleware = [ yourMiddleware, someOtherMiddleware ];
 admin.route({
@@ -633,7 +635,7 @@ admin.route({
 This also works with the .get(),post(),put(),delete(), etc HTTP method helpers.
 
 ```js
-const router = require('koa-joi-router');
+const router = require('koa-joi-router-ng');
 const admin = router();
 const commonMiddleware = [ yourMiddleware, someOtherMiddleware ];
 admin.get('/', commonMiddleware, yourHandler);
@@ -641,7 +643,7 @@ admin.get('/', commonMiddleware, yourHandler);
 
 ## Handling errors
 
-By default, `koa-joi-router` stops processing the middleware stack when either
+By default, `koa-joi-router-ng` stops processing the middleware stack when either
 input validation fails. This means your route will not be reached. If
 this isn't what you want, for example, if you're writing a web app which needs
 to respond with custom html describing the errors, set the `validate.continueOnError`
